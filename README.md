@@ -52,7 +52,7 @@ signs data set:
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. It is a histogram representing the frequency of signs in the training data set. The training dataset is thus not uniform and requires additional samples for proper training. An analysis of the accuracies for the various classes is needed to determine which of the classes the classifier is most confused about. 
 
 ![alt text][image1]
 
