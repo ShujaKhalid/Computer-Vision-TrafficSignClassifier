@@ -17,7 +17,7 @@ ClassId,SignName,Potential for more images,How
 15,No vehicles,yes,mirror
 16,Vehicles over 3.5 metric tons prohibited,yes,mirror
 17,No entry,yes,mirror
-18,General caution,yes.mirror
+18,General caution,yes,mirror
 19,Dangerous curve to the left,yes,mirror becomes 20
 20,Dangerous curve to the right,yes,mirror becomes 19
 21,Double curve,no,
