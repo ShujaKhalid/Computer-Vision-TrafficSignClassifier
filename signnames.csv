@@ -1,44 +1,44 @@
-ClassId,SignName
-0,Speed limit (20km/h)
-1,Speed limit (30km/h)
-2,Speed limit (50km/h)
-3,Speed limit (60km/h)
-4,Speed limit (70km/h)
-5,Speed limit (80km/h)
-6,End of speed limit (80km/h)
-7,Speed limit (100km/h)
-8,Speed limit (120km/h)
-9,No passing
-10,No passing for vehicles over 3.5 metric tons
-11,Right-of-way at the next intersection
-12,Priority road
-13,Yield
-14,Stop
-15,No vehicles
-16,Vehicles over 3.5 metric tons prohibited
-17,No entry
-18,General caution
-19,Dangerous curve to the left
-20,Dangerous curve to the right
-21,Double curve
-22,Bumpy road
-23,Slippery road
-24,Road narrows on the right
-25,Road work
-26,Traffic signals
-27,Pedestrians
-28,Children crossing
-29,Bicycles crossing
-30,Beware of ice/snow
-31,Wild animals crossing
-32,End of all speed and passing limits
-33,Turn right ahead
-34,Turn left ahead
-35,Ahead only
-36,Go straight or right
-37,Go straight or left
-38,Keep right
-39,Keep left
-40,Roundabout mandatory
-41,End of no passing
-42,End of no passing by vehicles over 3.5 metric tons
+ClassId,SignName,Potential for more images,How
+0,Speed limit (20km/h),no
+1,Speed limit (30km/h),no
+2,Speed limit (50km/h),no
+3,Speed limit (60km/h),no
+4,Speed limit (70km/h),no
+5,Speed limit (80km/h),no
+6,End of speed limit (80km/h),no
+7,Speed limit (100km/h),no
+8,Speed limit (120km/h),no
+9,No passing,yes,mirror
+10,No passing for vehicles over 3.5 metric tons,no
+11,Right-of-way at the next intersection,yes,mirror
+12,Priority road,yes,mirror
+13,Yield,yes,mirror
+14,Stop,no
+15,No vehicles,yes,mirror
+16,Vehicles over 3.5 metric tons prohibited,yes,mirror
+17,No entry,yes,mirror
+18,General caution,yes.mirror
+19,Dangerous curve to the left,yes,mirror becomes 20
+20,Dangerous curve to the right,yes,mirror becomes 19
+21,Double curve,no
+22,Bumpy road,yes,mirror
+23,Slippery road,no
+24,Road narrows on the right,no
+25,Road work,no
+26,Traffic signals,yes,mirror
+27,Pedestrians,no
+28,Children crossing,no
+29,Bicycles crossing,yes,mirror
+30,Beware of ice/snow,yes,mirror
+31,Wild animals crossing,no
+32,End of all speed and passing limits,no
+33,Turn right ahead,yes,mirror becomes 34
+34,Turn left ahead,yes,mirror becomes 33
+35,Ahead only,no
+36,Go straight or right,yes,mirror becomes 37
+37,Go straight or left,yes,mirror becomes 36
+38,Keep right,yes,mirror becomes 39
+39,Keep left,yes,mirror becomes 38
+40,Roundabout mandatory,yes,mirror
+41,End of no passing,no
+42,End of no passing by vehicles over 3.5 metric tons,,no
