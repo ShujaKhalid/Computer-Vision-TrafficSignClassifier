@@ -18,6 +18,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./training_data_dist.png "Visualization"
+[image1]: ./training_data_dist_new.png "Visualization"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples_test/13.jpg "Traffic Sign 1"
@@ -64,6 +65,11 @@ As a first step, I decided to convert the images to graysccale because the LeNet
 Here is an example of a traffic sign image before and after grayscaling.
 
 ![alt text][image2]
+
+The next step was to create additional images as the visualization of the data clearly shows that there aren't enough images to properly train the model. A number of images were thus modified to create new images. A summary of the images that were modified and how they were modified is included in [signnames.csv] (https://github.com/ShujaKhalid/Computer-Vision-TrafficSignClassifier/blob/master/signnames.csv)
+
+The resulting data distribution is presented below:
+![alt text][image1]
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
