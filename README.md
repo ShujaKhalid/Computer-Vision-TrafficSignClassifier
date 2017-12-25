@@ -97,9 +97,9 @@ To train the model, I used the Adam optimizer, a batch size of 128 and 500 epoch
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of 0.96
-* validation set accuracy of 0.97 
-* test set accuracy of 0.94
+* training set accuracy of 0.99
+* validation set accuracy of 0.94
+* test set accuracy of 0.93
 
 The LeNet architecture was chosen for the analysis and in order to gain better performance, the hyperparameters were tuned. The aforementioned LeNet structure has shown to provide very good results in identifying traffic signs and digits (http://yann.lecun.com/exdb/lenet/).
 
@@ -139,52 +139,30 @@ The code for making predictions on my final model is located in the of the Ipyth
 
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-|          			|    									| 
-|      				|  										|
-| 				| 											|
-| 	      			| 				 				|
-| 				    |       							|
+| Probability     |     Prediction	        					| 
+|:--------------------:|:---------------------------------------------:| 
 
 
 For the second image ... 
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-|          			|    									| 
-|      				|  										|
-| 				| 											|
-| 	      			| 				 				|
-| 				    |       							|
+| Probability   	 |     Prediction	        					| 
+|:--------------------:|:---------------------------------------------:| 
+
 
 For the third image ...
 
-| Probability         	|     Prediction	        					| 
+| Probability    	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|          			|    									| 
-|      				|  										|
-| 				| 											|
-| 	      			| 				 				|
-| 				    |       							|
+
 
 For the fourth image ...
 
-| Probability         	|     Prediction	        					| 
+| Probability    	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|          			|    									| 
-|      				|  										|
-| 				| 											|
-| 	      			| 				 				|
-| 				    |       							|
+
 
 For thefifth image ...
 
-| Probability         	|     Prediction	        					| 
+| Probability    	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|          			|    									| 
-|      				|  										|
-| 				| 											|
-| 	      			| 				 				|
-| 				    |       							|
 
