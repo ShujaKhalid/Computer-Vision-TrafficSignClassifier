@@ -105,7 +105,7 @@ To train the model, I used the Adam optimizer, a batch size of 256 and 500 epoch
 My final model results were:
 * training set accuracy of 0.99
 * validation set accuracy of 0.95
-* test set accuracy of 0.94
+* test set accuracy of 0.92
 
 The LeNet architecture was chosen for the analysis and in order to gain better performance, the hyperparameters were tuned. The aforementioned LeNet structure has shown to provide very good results in identifying traffic signs and digits (http://yann.lecun.com/exdb/lenet/).
 
