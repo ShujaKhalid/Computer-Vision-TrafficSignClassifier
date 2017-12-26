@@ -1,0 +1,2986 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Traffic\_Sign\_Classifier}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{self-driving-car-engineer-nanodegree}{%
+\section{Self-Driving Car Engineer
+Nanodegree}\label{self-driving-car-engineer-nanodegree}}
+
+\hypertarget{deep-learning}{%
+\subsection{Deep Learning}\label{deep-learning}}
+
+\hypertarget{project-build-a-traffic-sign-recognition-classifier}{%
+\subsection{Project: Build a Traffic Sign Recognition
+Classifier}\label{project-build-a-traffic-sign-recognition-classifier}}
+
+In this notebook, a template is provided for you to implement your
+functionality in stages, which is required to successfully complete this
+project. If additional code is required that cannot be included in the
+notebook, be sure that the Python code is successfully imported and
+included in your submission if necessary.
+
+\begin{quote}
+\textbf{Note}: Once you have completed all of the code implementations,
+you need to finalize your work by exporting the iPython Notebook as an
+HTML document. Before exporting the notebook to html, all of the code
+cells need to have been run so that reviewers can see the final
+implementation and output. You can then export the notebook by using the
+menu above and navigating to \n``,''\textbf{File -\textgreater{}
+Download as -\textgreater{} HTML (.html)}. Include the finished document
+along with this notebook as your submission.
+\end{quote}
+
+In addition to implementing code, there is a writeup to complete. The
+writeup should be completed in a separate file, which can be either a
+markdown file or a pdf document. There is a
+\href{https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md}{write
+up template} that can be used to guide the writing process. Completing
+the code template and writeup template will cover all of the
+\href{https://review.udacity.com/\#!/rubrics/481/view}{rubric points}
+for this project.
+
+The \href{https://review.udacity.com/\#!/rubrics/481/view}{rubric}
+contains ``Stand Out Suggestions'' for enhancing the project beyond the
+minimum requirements. The stand out suggestions are optional. If you
+decide to pursue the ``stand out suggestions'', you can include the code
+in this Ipython notebook and also discuss the results in the writeup
+file.
+
+\begin{quote}
+\textbf{Note:} Code and Markdown cells can be executed using the
+\textbf{Shift + Enter} keyboard shortcut. In addition, Markdown cells
+can be edited by typically double-clicking the cell to enter edit mode.
+\end{quote}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-0-load-the-data}{%
+\subsection{Step 0: Load The Data}\label{step-0-load-the-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Load pickled data}
+        \PY{k+kn}{import} \PY{n+nn}{pickle}
+        
+        \PY{c+c1}{\PYZsh{} TODO: Fill this in based on where you saved the training and testing data}
+        
+        \PY{n}{training\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./traffic\PYZhy{}signs\PYZhy{}data/train.p}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{validation\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./traffic\PYZhy{}signs\PYZhy{}data/valid.p}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{testing\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./traffic\PYZhy{}signs\PYZhy{}data/test.p}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{training\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{train} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{validation\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{valid} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{testing\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{test} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+            
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{X\PYZus{}valid}\PY{p}{,} \PY{n}{y\PYZus{}valid} \PY{o}{=} \PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-1-dataset-summary-exploration}{%
+\subsection{Step 1: Dataset Summary \&
+Exploration}\label{step-1-dataset-summary-exploration}}
+
+The pickled data is a dictionary with 4 key/value pairs:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\textquotesingle{}features\textquotesingle{}} is a 4D array
+  containing raw pixel data of the traffic sign images, (num examples,
+  width, height, channels).
+\item
+  \texttt{\textquotesingle{}labels\textquotesingle{}} is a 1D array
+  containing the label/class id of the traffic sign. The file
+  \texttt{signnames.csv} contains id -\textgreater{} name mappings for
+  each id.
+\item
+  \texttt{\textquotesingle{}sizes\textquotesingle{}} is a list
+  containing tuples, (width, height) representing the original width and
+  height the image.
+\item
+  \texttt{\textquotesingle{}coords\textquotesingle{}} is a list
+  containing tuples, (x1, y1, x2, y2) representing coordinates of a
+  bounding box around the sign in the image. \textbf{THESE COORDINATES
+  ASSUME THE ORIGINAL IMAGE. THE PICKLED DATA CONTAINS RESIZED VERSIONS
+  (32 by 32) OF THESE IMAGES}
+\end{itemize}
+
+Complete the basic data summary below. Use python, numpy and/or pandas
+methods to calculate the data summary rather than hard coding the
+results. For example, the
+\href{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.shape.html}{pandas
+shape method} might be useful for calculating some of the summary
+results.
+
+    \hypertarget{provide-a-basic-summary-of-the-data-set-using-python-numpy-andor-pandas}{%
+\subsubsection{Provide a Basic Summary of the Data Set Using Python,
+Numpy and/or
+Pandas}\label{provide-a-basic-summary-of-the-data-set-using-python-numpy-andor-pandas}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Replace each question mark with the appropriate value. }
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Use python, pandas or numpy methods rather than hard coding the results}
+        
+        \PY{c+c1}{\PYZsh{} TODO: Number of training examples}
+        \PY{n}{n\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} TODO: Number of validation examples}
+        \PY{n}{n\PYZus{}validation} \PY{o}{=} \PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} TODO: Number of testing examples.}
+        \PY{n}{n\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} TODO: What\PYZsq{}s the shape of an traffic sign image?}
+        \PY{n}{image\PYZus{}shape} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+        
+        \PY{c+c1}{\PYZsh{} TODO: How many unique classes/labels there are in the dataset.}
+        \PY{n}{n\PYZus{}classes} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of training examples =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}train}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of training examples =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}validation}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of testing examples =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}test}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image data shape =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{image\PYZus{}shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of classes =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of training examples = 34799
+Number of training examples = 4410
+Number of testing examples = 12630
+Image data shape = (32, 32, 3)
+Number of classes = 43
+
+    \end{Verbatim}
+
+    \hypertarget{include-an-exploratory-visualization-of-the-dataset}{%
+\subsubsection{Include an exploratory visualization of the
+dataset}\label{include-an-exploratory-visualization-of-the-dataset}}
+
+    Visualize the German Traffic Signs Dataset using the pickled file(s).
+This is open ended, suggestions include: plotting traffic sign images,
+plotting the count of each sign, etc.
+
+The \href{http://matplotlib.org/}{Matplotlib}
+\href{http://matplotlib.org/examples/index.html}{examples} and
+\href{http://matplotlib.org/gallery.html}{gallery} pages are a great
+resource for doing visualizations in Python.
+
+\textbf{NOTE:} It's recommended you start with something simple first.
+If you wish to do more, come back to it after you've completed the rest
+of the sections. It can be interesting to look at the distribution of
+classes in the training, validation and test set. Is the distribution
+the same? Are there more examples of some classes than others?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Data exploration visualization code goes here.}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{c+c1}{\PYZsh{} Normalization and grayscale flags:}
+        
+        \PY{n}{gray} \PY{o}{=} \PY{k+kc}{True}
+        \PY{n}{normalize} \PY{o}{=} \PY{k+kc}{False}
+        
+        \PY{k}{if} \PY{p}{(}\PY{n}{gray}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dim} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} dimension required by the nn}
+            \PY{n}{X\PYZus{}train\PYZus{}tmp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{X\PYZus{}valid\PYZus{}tmp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{X\PYZus{}test\PYZus{}tmp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Converting the images to grayscale}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X\PYZus{}train\PYZus{}tmp}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.299}\PY{p}{,} \PY{l+m+mf}{0.587}\PY{p}{,} \PY{l+m+mf}{0.114}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X\PYZus{}valid\PYZus{}tmp}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.299}\PY{p}{,} \PY{l+m+mf}{0.587}\PY{p}{,} \PY{l+m+mf}{0.114}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X\PYZus{}test\PYZus{}tmp}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.299}\PY{p}{,} \PY{l+m+mf}{0.587}\PY{p}{,} \PY{l+m+mf}{0.114}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+            \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}tmp}
+            \PY{n}{X\PYZus{}valid} \PY{o}{=} \PY{n}{X\PYZus{}valid\PYZus{}tmp}
+            \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test\PYZus{}tmp}
+        
+            \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{p}{[}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{n}{X\PYZus{}valid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{p}{,} \PY{p}{[}\PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{p}{[}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{dim} \PY{o}{=} \PY{l+m+mi}{3}
+                
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{spread} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}\PYZsh{} Distribution of classes in the dataset}
+        \PY{l+s+sd}{for i in range(n\PYZus{}classes):}
+        \PY{l+s+sd}{    spread[i] = np.sum(y\PYZus{}train==i)}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{n}{num\PYZus{}bins} \PY{o}{=} \PY{n}{n\PYZus{}classes}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} the histogram of the data}
+        \PY{n}{n}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{patches} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{num\PYZus{}bins}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} add a \PYZsq{}best fit\PYZsq{} line}
+        \PY{c+c1}{\PYZsh{}ax.plot(bins, \PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of training data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(34799, 32, 32, 1)
+(4410, 32, 32, 1)
+(12630, 32, 32, 1)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x21b3e553a90>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x21b3eeeb5f8>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Visualization of each type of road sign running through the classifier}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{:}
+            \PY{n}{exp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{n}{i}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{exp}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+36
+(32, 32, 1)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}khalid18\textbackslash{}AppData\textbackslash{}Local\textbackslash{}conda\textbackslash{}conda\textbackslash{}envs\textbackslash{}carnd-term1-gpu\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}pyplot.py:524: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max\_open\_warning`).
+  max\_open\_warning, RuntimeWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_16.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_18.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_20.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_22.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_23.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_24.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_25.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_26.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_27.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_28.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_29.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_30.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_31.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_32.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_33.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_34.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_35.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_36.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_37.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_38.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_39.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_40.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_41.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_42.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_43.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_44.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_45.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Creating new training data based on the information in signnames.csv}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Indicate the images that will be switched }
+        \PY{n}{flipper} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{37}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{,}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{37}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{n}{X\PYZus{}train\PYZus{}new} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+        \PY{n}{y\PYZus{}train\PYZus{}new} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}testing = 0\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{flipper}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j}\PY{p}{,}\PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{n}{flipper}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{p}{(}\PY{n}{k}\PY{o}{==}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{old\PYZus{}image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{new\PYZus{}image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{X\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}image}\PY{p}{)}
+                    \PY{n}{y\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{flipper}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}            print(\PYZsq{}Current image is:\PYZsq{} + str(flipper[1][i]))}
+        \PY{l+s+sd}{            plt.figure()}
+        \PY{l+s+sd}{            plt.imshow(old\PYZus{}image, cmap=\PYZdq{}gray\PYZdq{})}
+        \PY{l+s+sd}{            plt.figure()}
+        \PY{l+s+sd}{            plt.imshow(new\PYZus{}image, cmap=\PYZdq{}gray\PYZdq{})}
+        \PY{l+s+sd}{            testing+=1}
+        \PY{l+s+sd}{            if (testing==3):}
+        \PY{l+s+sd}{                break;\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{n}{X\PYZus{}train\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{p}{)}
+        \PY{n}{y\PYZus{}train\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}new}\PY{p}{)}
+        \PY{n}{X\PYZus{}train\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{p}{,}\PY{p}{[}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{dim}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of new X\PYZus{}train matrix is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of new y\PYZus{}train array is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of old X\PYZus{}train matrix is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of old y\PYZus{}train array is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{X\PYZus{}train\PYZus{}combined} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{p}{)}\PY{p}{)}
+        \PY{n}{y\PYZus{}train\PYZus{}combined} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train\PYZus{}new}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of combined X\PYZus{}train matrix is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}combined}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of combined y\PYZus{}train array is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}combined}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{X\PYZus{}train\PYZus{}old} \PY{o}{=} \PY{n}{X\PYZus{}train}
+        \PY{n}{y\PYZus{}train\PYZus{}old} \PY{o}{=} \PY{n}{y\PYZus{}train}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}combined}
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{y\PYZus{}train\PYZus{}combined}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+36
+(32, 32, 1)
+Shape of new X\_train matrix is: (15149, 32, 32, 1)
+Shape of new y\_train array is: (15149,)
+Shape of old X\_train matrix is: (34799, 32, 32, 1)
+Shape of old y\_train array is: (34799,)
+Shape of combined X\_train matrix is: (49948, 32, 32, 1)
+Shape of combined y\_train array is: (49948,)
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-2-design-and-test-a-model-architecture}{%
+\subsection{Step 2: Design and Test a Model
+Architecture}\label{step-2-design-and-test-a-model-architecture}}
+
+Design and implement a deep learning model that learns to recognize
+traffic signs. Train and test your model on the
+\href{http://benchmark.ini.rub.de/?section=gtsrb\&subsection=dataset}{German
+Traffic Sign Dataset}.
+
+The LeNet-5 implementation shown in the
+\href{https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/6df7ae49-c61c-4bb2-a23e-6527e69209ec/lessons/601ae704-1035-4287-8b11-e2c2716217ad/concepts/d4aca031-508f-4e0b-b493-e7b706120f81}{classroom}
+at the end of the CNN lesson is a solid starting point. You'll have to
+change the number of classes and possibly the preprocessing, but aside
+from that it's plug and play!
+
+With the LeNet-5 solution from the lecture, you should expect a
+validation set accuracy of about 0.89. To meet specifications, the
+validation set accuracy will need to be at least 0.93. It is possible to
+get an even higher accuracy, but 0.93 is the minimum for a successful
+project submission.
+
+There are various aspects to consider when thinking about this problem:
+
+\begin{itemize}
+\tightlist
+\item
+  Neural network architecture (is the network over or underfitting?)
+\item
+  Play around preprocessing techniques (normalization, rgb to grayscale,
+  etc)
+\item
+  Number of examples per label (some have more than others).
+\item
+  Generate fake data.
+\end{itemize}
+
+Here is an example of a
+\href{http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf}{published
+baseline model on this problem}. It's not required to be familiar with
+the approach used in the paper but, it's good practice to try to read
+papers like these.
+
+    \hypertarget{pre-process-the-data-set-normalization-grayscale-etc.}{%
+\subsubsection{Pre-process the Data Set (normalization, grayscale,
+etc.)}\label{pre-process-the-data-set-normalization-grayscale-etc.}}
+
+    Minimally, the image data should be normalized so that the data has mean
+zero and equal variance. For image data, \texttt{(pixel\ -\ 128)/\ 128}
+is a quick way to approximately normalize the data and can be used in
+this project.
+
+Other pre-processing steps are optional. You can try different
+techniques to see if it improves performance.
+
+Use the code cell (or multiple code cells, if necessary) to implement
+the first step of your project.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Preprocess the data here. It is required to normalize the data. Other preprocessing steps could include }
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} converting to grayscale, etc.}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{c+c1}{\PYZsh{} Define normalizer function}
+        \PY{k}{def} \PY{n+nf}{normalizer}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:}
+            \PY{n}{val} \PY{o}{=} \PY{p}{(}\PY{n}{val}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{)}
+            \PY{k}{return} \PY{n}{val} 
+        
+        \PY{k}{if} \PY{p}{(}\PY{n}{normalize}\PY{p}{)}\PY{p}{:}
+            \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{normalizer}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+            \PY{n}{X\PYZus{}valid} \PY{o}{=} \PY{n}{normalizer}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{p}{)}
+            \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{normalizer}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Shuffle the data}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{shuffle}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)} 
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(49948, 32, 32, 1)
+(49948,)
+
+    \end{Verbatim}
+
+    \hypertarget{model-architecture}{%
+\subsubsection{Model Architecture}\label{model-architecture}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Define your architecture here.}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+        
+        \PY{c+c1}{\PYZsh{} Setting up tensorflow}
+        \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{contrib}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{flatten}
+        
+        \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{500}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{256}
+        
+        \PY{k}{def} \PY{n+nf}{Net}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Hyperparameters}
+            \PY{n}{mu} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{}mean}
+            \PY{n}{sigma} \PY{o}{=} \PY{l+m+mf}{0.05} \PY{c+c1}{\PYZsh{}standard deviation}
+            
+            \PY{c+c1}{\PYZsh{}\PYZti{}\PYZti{}\PYZti{}Layer 1 \PYZhy{} Set up first convolutional layer}
+            \PY{n}{conv1\PYZus{}W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{dim}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{n}{sigma}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}declare filter dimensions}
+            \PY{n}{conv1\PYZus{}b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}define the bias}
+            \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{conv1\PYZus{}W}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{n}{conv1\PYZus{}b} \PY{c+c1}{\PYZsh{}add the bias to the result of the convolution}
+        
+            \PY{c+c1}{\PYZsh{} Activation \PYZhy{} Run the resulting values through an activation function}
+            \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{conv1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Add a pooling layer}
+            \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{max\PYZus{}pool}\PY{p}{(}\PY{n}{conv1}\PY{p}{,} \PY{n}{ksize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}Use a 2x2 kernel with a stride of 2}
+            
+            \PY{c+c1}{\PYZsh{}\PYZti{}\PYZti{}\PYZti{}Layer2 \PYZhy{} Set up the second convolutional layer}
+            \PY{n}{conv2\PYZus{}W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{conv2\PYZus{}b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+            \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n}{conv1}\PY{p}{,} \PY{n}{conv2\PYZus{}W}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{n}{conv2\PYZus{}b}
+            
+            \PY{c+c1}{\PYZsh{} Activation \PYZhy{} Run the resulting values through an activation function again}
+            \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{conv2}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Add another pooling layer}
+            \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{max\PYZus{}pool}\PY{p}{(}\PY{n}{conv2}\PY{p}{,} \PY{n}{ksize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Flatten data before sending to a fully connected layer}
+            \PY{n}{fc0} \PY{o}{=} \PY{n}{flatten}\PY{p}{(}\PY{n}{conv2}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}\PYZti{}\PYZti{}\PYZti{}Layer 3 \PYZhy{} Fully Connected}
+            \PY{n}{fc1\PYZus{}W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fc1\PYZus{}b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fc1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{fc0}\PY{p}{,} \PY{n}{fc1\PYZus{}W}\PY{p}{)} \PY{o}{+} \PY{n}{fc1\PYZus{}b}
+            
+            \PY{c+c1}{\PYZsh{} Activation}
+            \PY{n}{fc1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{fc1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}\PYZti{}\PYZti{}\PYZti{}Layer 4 \PYZhy{} Fully Connected once again!}
+            \PY{n}{fc2\PYZus{}W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{,}\PY{l+m+mi}{84}\PY{p}{)}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fc2\PYZus{}b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{84}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fc2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{fc1}\PY{p}{,} \PY{n}{fc2\PYZus{}W}\PY{p}{)} \PY{o}{+} \PY{n}{fc2\PYZus{}b}
+            
+            \PY{c+c1}{\PYZsh{} Activation}
+            \PY{n}{fc2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{fc2}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} ...Another Fully Connected Layer}
+            \PY{n}{fc3\PYZus{}W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{84}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{)}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fc3\PYZus{}b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{43}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fc3} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{fc2}\PY{p}{,}\PY{n}{fc3\PYZus{}W}\PY{p}{)} \PY{o}{+} \PY{n}{fc3\PYZus{}b}
+            
+            \PY{n}{logits} \PY{o}{=} \PY{n}{fc3}
+                
+            \PY{c+c1}{\PYZsh{}softmax = tf.nn.softmax(logits)}
+            
+            \PY{k}{return} \PY{n}{logits}  
+\end{Verbatim}
+
+
+    \hypertarget{train-validate-and-test-the-model}{%
+\subsubsection{Train, Validate and Test the
+Model}\label{train-validate-and-test-the-model}}
+
+    A validation set can be used to assess how well the model is performing.
+A low accuracy on the training and validation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Create placeholders for the data (None refers to the batch size which has not been determined yet!)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{p}{(}\PY{k+kc}{None}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{n}{dim}\PY{p}{)}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{(}\PY{k+kc}{None}\PY{p}{)}\PY{p}{)}
+        \PY{n}{one\PYZus{}hot\PYZus{}y} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{one\PYZus{}hot}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Train your model here.}
+        \PY{n}{rate} \PY{o}{=} \PY{l+m+mf}{0.001}
+        
+        \PY{n}{logits} \PY{o}{=} \PY{n}{Net}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{cross\PYZus{}entropy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{logits}\PY{o}{=}\PY{n}{logits}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{one\PYZus{}hot\PYZus{}y}\PY{p}{)} \PY{c+c1}{\PYZsh{} Quantify the extent to which our calculated logits correspond to the actual one hot encoded labels}
+        \PY{n}{loss\PYZus{}operation} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{cross\PYZus{}entropy}\PY{p}{)} \PY{c+c1}{\PYZsh{} Calculate the average cross\PYZhy{}entropy}
+        \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{rate}\PY{p}{)} \PY{c+c1}{\PYZsh{} Adam Optimizer used for function optimization}
+        \PY{n}{training\PYZus{}operation} \PY{o}{=} \PY{n}{optimizer}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{loss\PYZus{}operation}\PY{p}{)} \PY{c+c1}{\PYZsh{} Use the optimizer to minimize the loss function }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Model evaluation}
+        \PY{n}{correct\PYZus{}prediction} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{equal}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{logits}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{one\PYZus{}hot\PYZus{}y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} logits and one\PYZus{}hot\PYZus{}y are both nx10 matrices and the resulting matrix is nx1}
+        \PY{n}{accuracy\PYZus{}operation} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{correct\PYZus{}prediction}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Evaluation function}
+        \PY{k}{def} \PY{n+nf}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}data}\PY{p}{,} \PY{n}{y\PYZus{}data}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}examples} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}data}\PY{p}{)}
+            \PY{n}{total\PYZus{}accuracy} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{sess} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}default\PYZus{}session}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{offset} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{num\PYZus{}examples}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                \PY{n}{batch\PYZus{}x}\PY{p}{,} \PY{n}{batch\PYZus{}y} \PY{o}{=} \PY{n}{X\PYZus{}data}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{n}{offset}\PY{o}{+}\PY{n}{batch\PYZus{}size}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}data}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{n}{offset}\PY{o}{+}\PY{n}{batch\PYZus{}size}\PY{p}{]}
+                \PY{n}{accuracy} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{accuracy\PYZus{}operation}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{batch\PYZus{}x}\PY{p}{,} \PY{n}{y}\PY{p}{:} \PY{n}{batch\PYZus{}y}\PY{p}{\PYZcb{}}\PY{p}{)}
+                \PY{n}{total\PYZus{}accuracy} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{accuracy}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{batch\PYZus{}x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{total\PYZus{}accuracy}\PY{o}{/}\PY{n}{num\PYZus{}examples}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Train the model}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Initialize the globl variables}
+             \PY{n}{num\PYZus{}examples} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{shuffle}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{offset} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{num\PYZus{}examples}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{batch\PYZus{}X}\PY{p}{,} \PY{n}{batch\PYZus{}y} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{n}{offset}\PY{o}{+}\PY{n}{batch\PYZus{}size}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{n}{offset}\PY{o}{+}\PY{n}{batch\PYZus{}size}\PY{p}{]}
+                     \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{training\PYZus{}operation}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{batch\PYZus{}X}\PY{p}{,} \PY{n}{y}\PY{p}{:} \PY{n}{batch\PYZus{}y}\PY{p}{\PYZcb{}}\PY{p}{)}
+                 
+                 \PY{n}{validation\PYZus{}accuracy} \PY{o}{=} \PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{p}{,} \PY{n}{y\PYZus{}valid}\PY{p}{)} \PY{c+c1}{\PYZsh{} Test trained model on validation data}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EPOCHS: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Validation accuracy: }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{validation\PYZus{}accuracy}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Generic code to save model}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{saver}
+             \PY{k}{except} \PY{n+ne}{NameError}\PY{p}{:}
+                 \PY{n}{saver} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{Saver}\PY{p}{(}\PY{p}{)}
+             \PY{n}{saver}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./net}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model saved!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training{\ldots}
+
+EPOCHS: 1
+Validation accuracy: 0.753
+
+EPOCHS: 2
+Validation accuracy: 0.821
+
+EPOCHS: 3
+Validation accuracy: 0.887
+
+EPOCHS: 4
+Validation accuracy: 0.897
+
+EPOCHS: 5
+Validation accuracy: 0.908
+
+EPOCHS: 6
+Validation accuracy: 0.898
+
+EPOCHS: 7
+Validation accuracy: 0.917
+
+EPOCHS: 8
+Validation accuracy: 0.901
+
+EPOCHS: 9
+Validation accuracy: 0.905
+
+EPOCHS: 10
+Validation accuracy: 0.898
+
+EPOCHS: 11
+Validation accuracy: 0.932
+
+EPOCHS: 12
+Validation accuracy: 0.918
+
+EPOCHS: 13
+Validation accuracy: 0.926
+
+EPOCHS: 14
+Validation accuracy: 0.923
+
+EPOCHS: 15
+Validation accuracy: 0.921
+
+EPOCHS: 16
+Validation accuracy: 0.907
+
+EPOCHS: 17
+Validation accuracy: 0.931
+
+EPOCHS: 18
+Validation accuracy: 0.936
+
+EPOCHS: 19
+Validation accuracy: 0.914
+
+EPOCHS: 20
+Validation accuracy: 0.923
+
+EPOCHS: 21
+Validation accuracy: 0.928
+
+EPOCHS: 22
+Validation accuracy: 0.934
+
+EPOCHS: 23
+Validation accuracy: 0.931
+
+EPOCHS: 24
+Validation accuracy: 0.929
+
+EPOCHS: 25
+Validation accuracy: 0.944
+
+EPOCHS: 26
+Validation accuracy: 0.930
+
+EPOCHS: 27
+Validation accuracy: 0.937
+
+EPOCHS: 28
+Validation accuracy: 0.935
+
+EPOCHS: 29
+Validation accuracy: 0.933
+
+EPOCHS: 30
+Validation accuracy: 0.919
+
+EPOCHS: 31
+Validation accuracy: 0.941
+
+EPOCHS: 32
+Validation accuracy: 0.933
+
+EPOCHS: 33
+Validation accuracy: 0.943
+
+EPOCHS: 34
+Validation accuracy: 0.934
+
+EPOCHS: 35
+Validation accuracy: 0.939
+
+EPOCHS: 36
+Validation accuracy: 0.937
+
+EPOCHS: 37
+Validation accuracy: 0.927
+
+EPOCHS: 38
+Validation accuracy: 0.931
+
+EPOCHS: 39
+Validation accuracy: 0.943
+
+EPOCHS: 40
+Validation accuracy: 0.939
+
+EPOCHS: 41
+Validation accuracy: 0.946
+
+EPOCHS: 42
+Validation accuracy: 0.941
+
+EPOCHS: 43
+Validation accuracy: 0.936
+
+EPOCHS: 44
+Validation accuracy: 0.940
+
+EPOCHS: 45
+Validation accuracy: 0.946
+
+EPOCHS: 46
+Validation accuracy: 0.939
+
+EPOCHS: 47
+Validation accuracy: 0.917
+
+EPOCHS: 48
+Validation accuracy: 0.917
+
+EPOCHS: 49
+Validation accuracy: 0.933
+
+EPOCHS: 50
+Validation accuracy: 0.928
+
+EPOCHS: 51
+Validation accuracy: 0.936
+
+EPOCHS: 52
+Validation accuracy: 0.924
+
+EPOCHS: 53
+Validation accuracy: 0.940
+
+EPOCHS: 54
+Validation accuracy: 0.946
+
+EPOCHS: 55
+Validation accuracy: 0.948
+
+EPOCHS: 56
+Validation accuracy: 0.945
+
+EPOCHS: 57
+Validation accuracy: 0.920
+
+EPOCHS: 58
+Validation accuracy: 0.938
+
+EPOCHS: 59
+Validation accuracy: 0.933
+
+EPOCHS: 60
+Validation accuracy: 0.942
+
+EPOCHS: 61
+Validation accuracy: 0.942
+
+EPOCHS: 62
+Validation accuracy: 0.944
+
+EPOCHS: 63
+Validation accuracy: 0.934
+
+EPOCHS: 64
+Validation accuracy: 0.937
+
+EPOCHS: 65
+Validation accuracy: 0.938
+
+EPOCHS: 66
+Validation accuracy: 0.944
+
+EPOCHS: 67
+Validation accuracy: 0.939
+
+EPOCHS: 68
+Validation accuracy: 0.949
+
+EPOCHS: 69
+Validation accuracy: 0.947
+
+EPOCHS: 70
+Validation accuracy: 0.931
+
+EPOCHS: 71
+Validation accuracy: 0.937
+
+EPOCHS: 72
+Validation accuracy: 0.927
+
+EPOCHS: 73
+Validation accuracy: 0.938
+
+EPOCHS: 74
+Validation accuracy: 0.939
+
+EPOCHS: 75
+Validation accuracy: 0.942
+
+EPOCHS: 76
+Validation accuracy: 0.935
+
+EPOCHS: 77
+Validation accuracy: 0.941
+
+EPOCHS: 78
+Validation accuracy: 0.932
+
+EPOCHS: 79
+Validation accuracy: 0.927
+
+EPOCHS: 80
+Validation accuracy: 0.932
+
+EPOCHS: 81
+Validation accuracy: 0.927
+
+EPOCHS: 82
+Validation accuracy: 0.943
+
+EPOCHS: 83
+Validation accuracy: 0.945
+
+EPOCHS: 84
+Validation accuracy: 0.930
+
+EPOCHS: 85
+Validation accuracy: 0.922
+
+EPOCHS: 86
+Validation accuracy: 0.943
+
+EPOCHS: 87
+Validation accuracy: 0.954
+
+EPOCHS: 88
+Validation accuracy: 0.943
+
+EPOCHS: 89
+Validation accuracy: 0.944
+
+EPOCHS: 90
+Validation accuracy: 0.948
+
+EPOCHS: 91
+Validation accuracy: 0.943
+
+EPOCHS: 92
+Validation accuracy: 0.925
+
+EPOCHS: 93
+Validation accuracy: 0.921
+
+EPOCHS: 94
+Validation accuracy: 0.949
+
+EPOCHS: 95
+Validation accuracy: 0.948
+
+EPOCHS: 96
+Validation accuracy: 0.942
+
+EPOCHS: 97
+Validation accuracy: 0.946
+
+EPOCHS: 98
+Validation accuracy: 0.946
+
+EPOCHS: 99
+Validation accuracy: 0.941
+
+EPOCHS: 100
+Validation accuracy: 0.954
+
+EPOCHS: 101
+Validation accuracy: 0.939
+
+EPOCHS: 102
+Validation accuracy: 0.931
+
+EPOCHS: 103
+Validation accuracy: 0.941
+
+EPOCHS: 104
+Validation accuracy: 0.944
+
+EPOCHS: 105
+Validation accuracy: 0.950
+
+EPOCHS: 106
+Validation accuracy: 0.950
+
+EPOCHS: 107
+Validation accuracy: 0.948
+
+EPOCHS: 108
+Validation accuracy: 0.945
+
+EPOCHS: 109
+Validation accuracy: 0.950
+
+EPOCHS: 110
+Validation accuracy: 0.946
+
+EPOCHS: 111
+Validation accuracy: 0.943
+
+EPOCHS: 112
+Validation accuracy: 0.945
+
+EPOCHS: 113
+Validation accuracy: 0.946
+
+EPOCHS: 114
+Validation accuracy: 0.941
+
+EPOCHS: 115
+Validation accuracy: 0.944
+
+EPOCHS: 116
+Validation accuracy: 0.943
+
+EPOCHS: 117
+Validation accuracy: 0.950
+
+EPOCHS: 118
+Validation accuracy: 0.928
+
+EPOCHS: 119
+Validation accuracy: 0.927
+
+EPOCHS: 120
+Validation accuracy: 0.946
+
+EPOCHS: 121
+Validation accuracy: 0.935
+
+EPOCHS: 122
+Validation accuracy: 0.943
+
+EPOCHS: 123
+Validation accuracy: 0.941
+
+EPOCHS: 124
+Validation accuracy: 0.946
+
+EPOCHS: 125
+Validation accuracy: 0.953
+
+EPOCHS: 126
+Validation accuracy: 0.933
+
+EPOCHS: 127
+Validation accuracy: 0.951
+
+EPOCHS: 128
+Validation accuracy: 0.940
+
+EPOCHS: 129
+Validation accuracy: 0.949
+
+EPOCHS: 130
+Validation accuracy: 0.947
+
+EPOCHS: 131
+Validation accuracy: 0.949
+
+EPOCHS: 132
+Validation accuracy: 0.948
+
+EPOCHS: 133
+Validation accuracy: 0.950
+
+EPOCHS: 134
+Validation accuracy: 0.929
+
+EPOCHS: 135
+Validation accuracy: 0.952
+
+EPOCHS: 136
+Validation accuracy: 0.954
+
+EPOCHS: 137
+Validation accuracy: 0.945
+
+EPOCHS: 138
+Validation accuracy: 0.949
+
+EPOCHS: 139
+Validation accuracy: 0.944
+
+EPOCHS: 140
+Validation accuracy: 0.945
+
+EPOCHS: 141
+Validation accuracy: 0.950
+
+EPOCHS: 142
+Validation accuracy: 0.953
+
+EPOCHS: 143
+Validation accuracy: 0.918
+
+EPOCHS: 144
+Validation accuracy: 0.952
+
+EPOCHS: 145
+Validation accuracy: 0.944
+
+EPOCHS: 146
+Validation accuracy: 0.954
+
+EPOCHS: 147
+Validation accuracy: 0.953
+
+EPOCHS: 148
+Validation accuracy: 0.936
+
+EPOCHS: 149
+Validation accuracy: 0.947
+
+EPOCHS: 150
+Validation accuracy: 0.932
+
+EPOCHS: 151
+Validation accuracy: 0.935
+
+EPOCHS: 152
+Validation accuracy: 0.951
+
+EPOCHS: 153
+Validation accuracy: 0.950
+
+EPOCHS: 154
+Validation accuracy: 0.951
+
+EPOCHS: 155
+Validation accuracy: 0.953
+
+EPOCHS: 156
+Validation accuracy: 0.956
+
+EPOCHS: 157
+Validation accuracy: 0.956
+
+EPOCHS: 158
+Validation accuracy: 0.957
+
+EPOCHS: 159
+Validation accuracy: 0.957
+
+EPOCHS: 160
+Validation accuracy: 0.957
+
+EPOCHS: 161
+Validation accuracy: 0.957
+
+EPOCHS: 162
+Validation accuracy: 0.957
+
+EPOCHS: 163
+Validation accuracy: 0.957
+
+EPOCHS: 164
+Validation accuracy: 0.957
+
+EPOCHS: 165
+Validation accuracy: 0.957
+
+EPOCHS: 166
+Validation accuracy: 0.957
+
+EPOCHS: 167
+Validation accuracy: 0.957
+
+EPOCHS: 168
+Validation accuracy: 0.957
+
+EPOCHS: 169
+Validation accuracy: 0.957
+
+EPOCHS: 170
+Validation accuracy: 0.957
+
+EPOCHS: 171
+Validation accuracy: 0.957
+
+EPOCHS: 172
+Validation accuracy: 0.957
+
+EPOCHS: 173
+Validation accuracy: 0.957
+
+EPOCHS: 174
+Validation accuracy: 0.957
+
+EPOCHS: 175
+Validation accuracy: 0.957
+
+EPOCHS: 176
+Validation accuracy: 0.957
+
+EPOCHS: 177
+Validation accuracy: 0.957
+
+EPOCHS: 178
+Validation accuracy: 0.957
+
+EPOCHS: 179
+Validation accuracy: 0.957
+
+EPOCHS: 180
+Validation accuracy: 0.958
+
+EPOCHS: 181
+Validation accuracy: 0.958
+
+EPOCHS: 182
+Validation accuracy: 0.957
+
+EPOCHS: 183
+Validation accuracy: 0.958
+
+EPOCHS: 184
+Validation accuracy: 0.958
+
+EPOCHS: 185
+Validation accuracy: 0.957
+
+EPOCHS: 186
+Validation accuracy: 0.957
+
+EPOCHS: 187
+Validation accuracy: 0.957
+
+EPOCHS: 188
+Validation accuracy: 0.957
+
+EPOCHS: 189
+Validation accuracy: 0.957
+
+EPOCHS: 190
+Validation accuracy: 0.957
+
+EPOCHS: 191
+Validation accuracy: 0.957
+
+EPOCHS: 192
+Validation accuracy: 0.957
+
+EPOCHS: 193
+Validation accuracy: 0.958
+
+EPOCHS: 194
+Validation accuracy: 0.958
+
+EPOCHS: 195
+Validation accuracy: 0.958
+
+EPOCHS: 196
+Validation accuracy: 0.957
+
+EPOCHS: 197
+Validation accuracy: 0.957
+
+EPOCHS: 198
+Validation accuracy: 0.957
+
+EPOCHS: 199
+Validation accuracy: 0.957
+
+EPOCHS: 200
+Validation accuracy: 0.957
+
+EPOCHS: 201
+Validation accuracy: 0.957
+
+EPOCHS: 202
+Validation accuracy: 0.957
+
+EPOCHS: 203
+Validation accuracy: 0.957
+
+EPOCHS: 204
+Validation accuracy: 0.957
+
+EPOCHS: 205
+Validation accuracy: 0.957
+
+EPOCHS: 206
+Validation accuracy: 0.957
+
+EPOCHS: 207
+Validation accuracy: 0.957
+
+EPOCHS: 208
+Validation accuracy: 0.957
+
+EPOCHS: 209
+Validation accuracy: 0.957
+
+EPOCHS: 210
+Validation accuracy: 0.958
+
+EPOCHS: 211
+Validation accuracy: 0.958
+
+EPOCHS: 212
+Validation accuracy: 0.958
+
+EPOCHS: 213
+Validation accuracy: 0.958
+
+EPOCHS: 214
+Validation accuracy: 0.958
+
+EPOCHS: 215
+Validation accuracy: 0.958
+
+EPOCHS: 216
+Validation accuracy: 0.958
+
+EPOCHS: 217
+Validation accuracy: 0.958
+
+EPOCHS: 218
+Validation accuracy: 0.958
+
+EPOCHS: 219
+Validation accuracy: 0.958
+
+EPOCHS: 220
+Validation accuracy: 0.958
+
+EPOCHS: 221
+Validation accuracy: 0.958
+
+EPOCHS: 222
+Validation accuracy: 0.958
+
+EPOCHS: 223
+Validation accuracy: 0.958
+
+EPOCHS: 224
+Validation accuracy: 0.958
+
+EPOCHS: 225
+Validation accuracy: 0.958
+
+EPOCHS: 226
+Validation accuracy: 0.959
+
+EPOCHS: 227
+Validation accuracy: 0.959
+
+EPOCHS: 228
+Validation accuracy: 0.959
+
+EPOCHS: 229
+Validation accuracy: 0.959
+
+EPOCHS: 230
+Validation accuracy: 0.959
+
+EPOCHS: 231
+Validation accuracy: 0.959
+
+EPOCHS: 232
+Validation accuracy: 0.959
+
+EPOCHS: 233
+Validation accuracy: 0.959
+
+EPOCHS: 234
+Validation accuracy: 0.959
+
+EPOCHS: 235
+Validation accuracy: 0.960
+
+EPOCHS: 236
+Validation accuracy: 0.960
+
+EPOCHS: 237
+Validation accuracy: 0.960
+
+EPOCHS: 238
+Validation accuracy: 0.960
+
+EPOCHS: 239
+Validation accuracy: 0.960
+
+EPOCHS: 240
+Validation accuracy: 0.960
+
+EPOCHS: 241
+Validation accuracy: 0.960
+
+EPOCHS: 242
+Validation accuracy: 0.960
+
+EPOCHS: 243
+Validation accuracy: 0.960
+
+EPOCHS: 244
+Validation accuracy: 0.960
+
+EPOCHS: 245
+Validation accuracy: 0.960
+
+EPOCHS: 246
+Validation accuracy: 0.960
+
+EPOCHS: 247
+Validation accuracy: 0.960
+
+EPOCHS: 248
+Validation accuracy: 0.960
+
+EPOCHS: 249
+Validation accuracy: 0.960
+
+EPOCHS: 250
+Validation accuracy: 0.961
+
+EPOCHS: 251
+Validation accuracy: 0.960
+
+EPOCHS: 252
+Validation accuracy: 0.960
+
+EPOCHS: 253
+Validation accuracy: 0.960
+
+EPOCHS: 254
+Validation accuracy: 0.960
+
+EPOCHS: 255
+Validation accuracy: 0.960
+
+EPOCHS: 256
+Validation accuracy: 0.960
+
+EPOCHS: 257
+Validation accuracy: 0.960
+
+EPOCHS: 258
+Validation accuracy: 0.960
+
+EPOCHS: 259
+Validation accuracy: 0.960
+
+EPOCHS: 260
+Validation accuracy: 0.960
+
+EPOCHS: 261
+Validation accuracy: 0.960
+
+EPOCHS: 262
+Validation accuracy: 0.960
+
+EPOCHS: 263
+Validation accuracy: 0.960
+
+EPOCHS: 264
+Validation accuracy: 0.960
+
+EPOCHS: 265
+Validation accuracy: 0.960
+
+EPOCHS: 266
+Validation accuracy: 0.959
+
+EPOCHS: 267
+Validation accuracy: 0.959
+
+EPOCHS: 268
+Validation accuracy: 0.959
+
+EPOCHS: 269
+Validation accuracy: 0.959
+
+EPOCHS: 270
+Validation accuracy: 0.959
+
+EPOCHS: 271
+Validation accuracy: 0.959
+
+EPOCHS: 272
+Validation accuracy: 0.960
+
+EPOCHS: 273
+Validation accuracy: 0.960
+
+EPOCHS: 274
+Validation accuracy: 0.960
+
+EPOCHS: 275
+Validation accuracy: 0.960
+
+EPOCHS: 276
+Validation accuracy: 0.960
+
+EPOCHS: 277
+Validation accuracy: 0.959
+
+EPOCHS: 278
+Validation accuracy: 0.959
+
+EPOCHS: 279
+Validation accuracy: 0.959
+
+EPOCHS: 280
+Validation accuracy: 0.959
+
+EPOCHS: 281
+Validation accuracy: 0.959
+
+EPOCHS: 282
+Validation accuracy: 0.959
+
+EPOCHS: 283
+Validation accuracy: 0.959
+
+EPOCHS: 284
+Validation accuracy: 0.959
+
+EPOCHS: 285
+Validation accuracy: 0.959
+
+EPOCHS: 286
+Validation accuracy: 0.960
+
+EPOCHS: 287
+Validation accuracy: 0.960
+
+EPOCHS: 288
+Validation accuracy: 0.960
+
+EPOCHS: 289
+Validation accuracy: 0.960
+
+EPOCHS: 290
+Validation accuracy: 0.960
+
+EPOCHS: 291
+Validation accuracy: 0.961
+
+EPOCHS: 292
+Validation accuracy: 0.960
+
+EPOCHS: 293
+Validation accuracy: 0.961
+
+EPOCHS: 294
+Validation accuracy: 0.960
+
+EPOCHS: 295
+Validation accuracy: 0.960
+
+EPOCHS: 296
+Validation accuracy: 0.960
+
+EPOCHS: 297
+Validation accuracy: 0.961
+
+EPOCHS: 298
+Validation accuracy: 0.961
+
+EPOCHS: 299
+Validation accuracy: 0.961
+
+EPOCHS: 300
+Validation accuracy: 0.961
+
+EPOCHS: 301
+Validation accuracy: 0.961
+
+EPOCHS: 302
+Validation accuracy: 0.961
+
+EPOCHS: 303
+Validation accuracy: 0.961
+
+EPOCHS: 304
+Validation accuracy: 0.961
+
+EPOCHS: 305
+Validation accuracy: 0.961
+
+EPOCHS: 306
+Validation accuracy: 0.960
+
+EPOCHS: 307
+Validation accuracy: 0.961
+
+EPOCHS: 308
+Validation accuracy: 0.961
+
+EPOCHS: 309
+Validation accuracy: 0.961
+
+EPOCHS: 310
+Validation accuracy: 0.960
+
+EPOCHS: 311
+Validation accuracy: 0.960
+
+EPOCHS: 312
+Validation accuracy: 0.902
+
+EPOCHS: 313
+Validation accuracy: 0.934
+
+EPOCHS: 314
+Validation accuracy: 0.954
+
+EPOCHS: 315
+Validation accuracy: 0.943
+
+EPOCHS: 316
+Validation accuracy: 0.953
+
+EPOCHS: 317
+Validation accuracy: 0.960
+
+EPOCHS: 318
+Validation accuracy: 0.948
+
+EPOCHS: 319
+Validation accuracy: 0.949
+
+EPOCHS: 320
+Validation accuracy: 0.936
+
+EPOCHS: 321
+Validation accuracy: 0.950
+
+EPOCHS: 322
+Validation accuracy: 0.954
+
+EPOCHS: 323
+Validation accuracy: 0.947
+
+EPOCHS: 324
+Validation accuracy: 0.945
+
+EPOCHS: 325
+Validation accuracy: 0.944
+
+EPOCHS: 326
+Validation accuracy: 0.941
+
+EPOCHS: 327
+Validation accuracy: 0.953
+
+EPOCHS: 328
+Validation accuracy: 0.945
+
+EPOCHS: 329
+Validation accuracy: 0.945
+
+EPOCHS: 330
+Validation accuracy: 0.951
+
+EPOCHS: 331
+Validation accuracy: 0.954
+
+EPOCHS: 332
+Validation accuracy: 0.944
+
+EPOCHS: 333
+Validation accuracy: 0.942
+
+EPOCHS: 334
+Validation accuracy: 0.954
+
+EPOCHS: 335
+Validation accuracy: 0.949
+
+EPOCHS: 336
+Validation accuracy: 0.936
+
+EPOCHS: 337
+Validation accuracy: 0.950
+
+EPOCHS: 338
+Validation accuracy: 0.954
+
+EPOCHS: 339
+Validation accuracy: 0.945
+
+EPOCHS: 340
+Validation accuracy: 0.955
+
+EPOCHS: 341
+Validation accuracy: 0.957
+
+EPOCHS: 342
+Validation accuracy: 0.958
+
+EPOCHS: 343
+Validation accuracy: 0.956
+
+EPOCHS: 344
+Validation accuracy: 0.956
+
+EPOCHS: 345
+Validation accuracy: 0.957
+
+EPOCHS: 346
+Validation accuracy: 0.957
+
+EPOCHS: 347
+Validation accuracy: 0.957
+
+EPOCHS: 348
+Validation accuracy: 0.957
+
+EPOCHS: 349
+Validation accuracy: 0.958
+
+EPOCHS: 350
+Validation accuracy: 0.958
+
+EPOCHS: 351
+Validation accuracy: 0.958
+
+EPOCHS: 352
+Validation accuracy: 0.958
+
+EPOCHS: 353
+Validation accuracy: 0.958
+
+EPOCHS: 354
+Validation accuracy: 0.958
+
+EPOCHS: 355
+Validation accuracy: 0.958
+
+EPOCHS: 356
+Validation accuracy: 0.958
+
+EPOCHS: 357
+Validation accuracy: 0.958
+
+EPOCHS: 358
+Validation accuracy: 0.958
+
+EPOCHS: 359
+Validation accuracy: 0.958
+
+EPOCHS: 360
+Validation accuracy: 0.958
+
+EPOCHS: 361
+Validation accuracy: 0.958
+
+EPOCHS: 362
+Validation accuracy: 0.959
+
+EPOCHS: 363
+Validation accuracy: 0.959
+
+EPOCHS: 364
+Validation accuracy: 0.959
+
+EPOCHS: 365
+Validation accuracy: 0.959
+
+EPOCHS: 366
+Validation accuracy: 0.959
+
+EPOCHS: 367
+Validation accuracy: 0.959
+
+EPOCHS: 368
+Validation accuracy: 0.959
+
+EPOCHS: 369
+Validation accuracy: 0.959
+
+EPOCHS: 370
+Validation accuracy: 0.959
+
+EPOCHS: 371
+Validation accuracy: 0.959
+
+EPOCHS: 372
+Validation accuracy: 0.959
+
+EPOCHS: 373
+Validation accuracy: 0.959
+
+EPOCHS: 374
+Validation accuracy: 0.959
+
+EPOCHS: 375
+Validation accuracy: 0.959
+
+EPOCHS: 376
+Validation accuracy: 0.960
+
+EPOCHS: 377
+Validation accuracy: 0.960
+
+EPOCHS: 378
+Validation accuracy: 0.960
+
+EPOCHS: 379
+Validation accuracy: 0.960
+
+EPOCHS: 380
+Validation accuracy: 0.960
+
+EPOCHS: 381
+Validation accuracy: 0.960
+
+EPOCHS: 382
+Validation accuracy: 0.960
+
+EPOCHS: 383
+Validation accuracy: 0.960
+
+EPOCHS: 384
+Validation accuracy: 0.960
+
+EPOCHS: 385
+Validation accuracy: 0.960
+
+EPOCHS: 386
+Validation accuracy: 0.960
+
+EPOCHS: 387
+Validation accuracy: 0.960
+
+EPOCHS: 388
+Validation accuracy: 0.960
+
+EPOCHS: 389
+Validation accuracy: 0.960
+
+EPOCHS: 390
+Validation accuracy: 0.960
+
+EPOCHS: 391
+Validation accuracy: 0.960
+
+EPOCHS: 392
+Validation accuracy: 0.960
+
+EPOCHS: 393
+Validation accuracy: 0.960
+
+EPOCHS: 394
+Validation accuracy: 0.960
+
+EPOCHS: 395
+Validation accuracy: 0.960
+
+EPOCHS: 396
+Validation accuracy: 0.960
+
+EPOCHS: 397
+Validation accuracy: 0.960
+
+EPOCHS: 398
+Validation accuracy: 0.960
+
+EPOCHS: 399
+Validation accuracy: 0.960
+
+EPOCHS: 400
+Validation accuracy: 0.960
+
+EPOCHS: 401
+Validation accuracy: 0.961
+
+EPOCHS: 402
+Validation accuracy: 0.961
+
+EPOCHS: 403
+Validation accuracy: 0.961
+
+EPOCHS: 404
+Validation accuracy: 0.961
+
+EPOCHS: 405
+Validation accuracy: 0.961
+
+EPOCHS: 406
+Validation accuracy: 0.961
+
+EPOCHS: 407
+Validation accuracy: 0.961
+
+EPOCHS: 408
+Validation accuracy: 0.961
+
+EPOCHS: 409
+Validation accuracy: 0.961
+
+EPOCHS: 410
+Validation accuracy: 0.961
+
+EPOCHS: 411
+Validation accuracy: 0.961
+
+EPOCHS: 412
+Validation accuracy: 0.961
+
+EPOCHS: 413
+Validation accuracy: 0.961
+
+EPOCHS: 414
+Validation accuracy: 0.961
+
+EPOCHS: 415
+Validation accuracy: 0.961
+
+EPOCHS: 416
+Validation accuracy: 0.961
+
+EPOCHS: 417
+Validation accuracy: 0.961
+
+EPOCHS: 418
+Validation accuracy: 0.961
+
+EPOCHS: 419
+Validation accuracy: 0.961
+
+EPOCHS: 420
+Validation accuracy: 0.962
+
+EPOCHS: 421
+Validation accuracy: 0.962
+
+EPOCHS: 422
+Validation accuracy: 0.962
+
+EPOCHS: 423
+Validation accuracy: 0.962
+
+EPOCHS: 424
+Validation accuracy: 0.962
+
+EPOCHS: 425
+Validation accuracy: 0.962
+
+EPOCHS: 426
+Validation accuracy: 0.962
+
+EPOCHS: 427
+Validation accuracy: 0.962
+
+EPOCHS: 428
+Validation accuracy: 0.962
+
+EPOCHS: 429
+Validation accuracy: 0.962
+
+EPOCHS: 430
+Validation accuracy: 0.962
+
+EPOCHS: 431
+Validation accuracy: 0.962
+
+EPOCHS: 432
+Validation accuracy: 0.962
+
+EPOCHS: 433
+Validation accuracy: 0.962
+
+EPOCHS: 434
+Validation accuracy: 0.962
+
+EPOCHS: 435
+Validation accuracy: 0.962
+
+EPOCHS: 436
+Validation accuracy: 0.961
+
+EPOCHS: 437
+Validation accuracy: 0.962
+
+EPOCHS: 438
+Validation accuracy: 0.962
+
+EPOCHS: 439
+Validation accuracy: 0.962
+
+EPOCHS: 440
+Validation accuracy: 0.962
+
+EPOCHS: 441
+Validation accuracy: 0.962
+
+EPOCHS: 442
+Validation accuracy: 0.962
+
+EPOCHS: 443
+Validation accuracy: 0.962
+
+EPOCHS: 444
+Validation accuracy: 0.962
+
+EPOCHS: 445
+Validation accuracy: 0.962
+
+EPOCHS: 446
+Validation accuracy: 0.962
+
+EPOCHS: 447
+Validation accuracy: 0.962
+
+EPOCHS: 448
+Validation accuracy: 0.962
+
+EPOCHS: 449
+Validation accuracy: 0.962
+
+EPOCHS: 450
+Validation accuracy: 0.962
+
+EPOCHS: 451
+Validation accuracy: 0.962
+
+EPOCHS: 452
+Validation accuracy: 0.962
+
+EPOCHS: 453
+Validation accuracy: 0.962
+
+EPOCHS: 454
+Validation accuracy: 0.962
+
+EPOCHS: 455
+Validation accuracy: 0.962
+
+EPOCHS: 456
+Validation accuracy: 0.962
+
+EPOCHS: 457
+Validation accuracy: 0.962
+
+EPOCHS: 458
+Validation accuracy: 0.962
+
+EPOCHS: 459
+Validation accuracy: 0.962
+
+EPOCHS: 460
+Validation accuracy: 0.962
+
+EPOCHS: 461
+Validation accuracy: 0.962
+
+EPOCHS: 462
+Validation accuracy: 0.962
+
+EPOCHS: 463
+Validation accuracy: 0.962
+
+EPOCHS: 464
+Validation accuracy: 0.962
+
+EPOCHS: 465
+Validation accuracy: 0.962
+
+EPOCHS: 466
+Validation accuracy: 0.962
+
+EPOCHS: 467
+Validation accuracy: 0.962
+
+EPOCHS: 468
+Validation accuracy: 0.961
+
+EPOCHS: 469
+Validation accuracy: 0.961
+
+EPOCHS: 470
+Validation accuracy: 0.961
+
+EPOCHS: 471
+Validation accuracy: 0.961
+
+EPOCHS: 472
+Validation accuracy: 0.961
+
+EPOCHS: 473
+Validation accuracy: 0.961
+
+EPOCHS: 474
+Validation accuracy: 0.961
+
+EPOCHS: 475
+Validation accuracy: 0.961
+
+EPOCHS: 476
+Validation accuracy: 0.962
+
+EPOCHS: 477
+Validation accuracy: 0.962
+
+EPOCHS: 478
+Validation accuracy: 0.963
+
+EPOCHS: 479
+Validation accuracy: 0.962
+
+EPOCHS: 480
+Validation accuracy: 0.963
+
+EPOCHS: 481
+Validation accuracy: 0.962
+
+EPOCHS: 482
+Validation accuracy: 0.963
+
+EPOCHS: 483
+Validation accuracy: 0.962
+
+EPOCHS: 484
+Validation accuracy: 0.962
+
+EPOCHS: 485
+Validation accuracy: 0.963
+
+EPOCHS: 486
+Validation accuracy: 0.962
+
+EPOCHS: 487
+Validation accuracy: 0.962
+
+EPOCHS: 488
+Validation accuracy: 0.962
+
+EPOCHS: 489
+Validation accuracy: 0.962
+
+EPOCHS: 490
+Validation accuracy: 0.961
+
+EPOCHS: 491
+Validation accuracy: 0.962
+
+EPOCHS: 492
+Validation accuracy: 0.961
+
+EPOCHS: 493
+Validation accuracy: 0.962
+
+EPOCHS: 494
+Validation accuracy: 0.961
+
+EPOCHS: 495
+Validation accuracy: 0.962
+
+EPOCHS: 496
+Validation accuracy: 0.962
+
+EPOCHS: 497
+Validation accuracy: 0.961
+
+EPOCHS: 498
+Validation accuracy: 0.961
+
+EPOCHS: 499
+Validation accuracy: 0.961
+
+EPOCHS: 500
+Validation accuracy: 0.949
+
+Model saved!
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-3-test-a-model-on-new-images}{%
+\subsection{Step 3: Test a Model on New
+Images}\label{step-3-test-a-model-on-new-images}}
+
+To give yourself more insight into how your model is working, download
+at least five pictures of German traffic signs from the web and use your
+model to predict the traffic sign type.
+
+You may find \texttt{signnames.csv} useful as it contains mappings from
+the class id (integer) to the actual sign name.
+
+    \hypertarget{load-and-output-the-images}{%
+\subsubsection{Load and Output the
+Images}\label{load-and-output-the-images}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Load the images and plot them here.}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+         \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}
+         \PY{n}{test\PYZus{}all} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Extract image 1:}
+         \PY{n}{testpic} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./examples\PYZus{}test/12.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{testpic1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{testpic}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{test\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testpic1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{testpic1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Extract image 2:}
+         \PY{n}{testpic} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./examples\PYZus{}test/13.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{testpic2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{testpic}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{test\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testpic2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{testpic2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Extract image 3:}
+         \PY{n}{testpic} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./examples\PYZus{}test/14.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{testpic3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{testpic}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{test\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testpic3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{testpic3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Extract image 4:}
+         \PY{n}{testpic} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./examples\PYZus{}test/17.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{testpic4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{testpic}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{test\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testpic4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{testpic4}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Extract image 5:}
+         \PY{n}{testpic} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./examples\PYZus{}test/36.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{testpic5} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{testpic}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{test\PYZus{}all}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testpic5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{testpic5}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}test\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{test\PYZus{}all}\PY{p}{)}
+         
+         \PY{k}{if} \PY{p}{(}\PY{n}{gray}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X\PYZus{}test\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}new}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{n}{X\PYZus{}test\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n}{X\PYZus{}test\PYZus{}new} \PY{o}{=} \PY{n}{X\PYZus{}test\PYZus{}new}
+             
+         \PY{n}{y\PYZus{}test\PYZus{}new} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{36}\PY{p}{]}
+         \PY{n}{y\PYZus{}test\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}test\PYZus{}new}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{analyze-the-validation-data-results}{%
+\subsubsection{Analyze the validation data
+results}\label{analyze-the-validation-data-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Test the model on the test data}
+         
+         \PY{n}{data} \PY{o}{=} \PY{n}{X\PYZus{}valid}
+         \PY{n}{actual} \PY{o}{=} \PY{n}{y\PYZus{}valid}
+         
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Initialize the globl variables}
+             \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model restored.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{res} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{logits}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{data}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{predictions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{predictions}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{res}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{actual}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of new images: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{predictions}\PY{o}{==}\PY{n}{actual}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+         \PY{k+kn}{import} \PY{n+nn}{itertools}
+         
+         \PY{n}{class\PYZus{}names} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{42}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute confusion matrix}
+         \PY{n}{cnf\PYZus{}matrix} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{actual}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cnf\PYZus{}matrix}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{accuracy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{cnf\PYZus{}matrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{num} \PY{o}{=} \PY{n}{cnf\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+             \PY{n}{den} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{cnf\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+             \PY{n}{accuracy}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{num}\PY{o}{/}\PY{n}{den}
+             \PY{k}{if} \PY{p}{(}\PY{n}{accuracy}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.9}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy for }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{accuracy}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{)}\PY{p}{,} \PY{n}{accuracy}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{l+m+mi}{43}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracies for each class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ./net
+Model restored.
+[ 32.  39.  32. {\ldots},  25.  25.  25.]
+[41 41 41 {\ldots}, 25 25 25]
+Accuracy of new images: 0.9492063492063492
+(43, 43)
+Accuracy for 16 is: 0.8833333333333333
+Accuracy for 20 is: 0.8
+Accuracy for 21 is: 0.7
+Accuracy for 22 is: 0.8
+Accuracy for 23 is: 0.6333333333333333
+Accuracy for 24 is: 0.5666666666666667
+Accuracy for 25 is: 0.8933333333333333
+Accuracy for 40 is: 0.8
+Accuracy for 41 is: 0.8666666666666667
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <matplotlib.text.Text at 0x21b30ae06a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{test-on-test-data}{%
+\subsubsection{Test on test data}\label{test-on-test-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Test the model on the test data}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Initialize the globl variables}
+             \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model restored.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{res} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{logits}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{X\PYZus{}test}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{predictions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{predictions}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{res}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of new images: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{predictions}\PY{o}{==}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ./net
+Model restored.
+[ 16.   1.  38. {\ldots},   5.   7.   2.]
+[16  1 38 {\ldots},  6  7 10]
+Accuracy of new images: 0.9196357878068092
+
+    \end{Verbatim}
+
+    \hypertarget{predict-the-sign-type-for-each-image}{%
+\subsubsection{Predict the Sign Type for Each
+Image}\label{predict-the-sign-type-for-each-image}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Run the predictions here and use the model to output the prediction for each image.}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Make sure to pre\PYZhy{}process the images with the same pre\PYZhy{}processing pipeline used earlier.}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+         \PY{c+c1}{\PYZsh{} Test new data}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Initialize the globl variables}
+             \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model restored.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{res} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{logits}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{X\PYZus{}test\PYZus{}new}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{predictions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{predictions}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{res}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test\PYZus{}new}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of new images: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{predictions}\PY{o}{==}\PY{n}{y\PYZus{}test\PYZus{}new}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ./net
+Model restored.
+[ 12.  13.  10.  17.  36.]
+[12 13 14 17 36]
+Accuracy of new images: 0.8
+
+    \end{Verbatim}
+
+    \hypertarget{analyze-performance}{%
+\subsubsection{Analyze Performance}\label{analyze-performance}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Calculate the accuracy for these 5 new images. }
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} For example, if the model predicted 1 out of 5 signs correctly, it\PYZsq{}s 20\PYZpc{} accurate on these new images.}
+\end{Verbatim}
+
+
+    \hypertarget{output-top-5-softmax-probabilities-for-each-image-found-on-the-web}{%
+\subsubsection{Output Top 5 Softmax Probabilities For Each Image Found
+on the
+Web}\label{output-top-5-softmax-probabilities-for-each-image-found-on-the-web}}
+
+    For each of the new images, print out the model's softmax probabilities
+to show the \textbf{certainty} of the model's predictions (limit the
+output to the top 5 probabilities for each image).
+\href{https://www.tensorflow.org/versions/r0.12/api_docs/python/nn.html\#top_k}{\texttt{tf.nn.top\_k}}
+could prove helpful here.
+
+The example below demonstrates how tf.nn.top\_k can be used to find the
+top k predictions for each image.
+
+\texttt{tf.nn.top\_k} will return the values and indices (class ids) of
+the top k predictions. So if k=3, for each sign, it'll return the 3
+largest probabilities (out of a possible 43) and the correspoding class
+ids.
+
+Take this numpy array as an example. The values in the array represent
+predictions. The array contains softmax probabilities for five candidate
+images with six possible classes. \texttt{tf.nn.top\_k} is used to
+choose the three classes with the highest probability:
+
+\begin{verbatim}
+# (5, 6) array
+a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
+         0.12789202],
+       [ 0.28086119,  0.27569815,  0.08594638,  0.0178669 ,  0.18063401,
+         0.15899337],
+       [ 0.26076848,  0.23664738,  0.08020603,  0.07001922,  0.1134371 ,
+         0.23892179],
+       [ 0.11943333,  0.29198961,  0.02605103,  0.26234032,  0.1351348 ,
+         0.16505091],
+       [ 0.09561176,  0.34396535,  0.0643941 ,  0.16240774,  0.24206137,
+         0.09155967]])
+\end{verbatim}
+
+Running it through \texttt{sess.run(tf.nn.top\_k(tf.constant(a),\ k=3))}
+produces:
+
+\begin{verbatim}
+TopKV2(values=array([[ 0.34763842,  0.24879643,  0.12789202],
+       [ 0.28086119,  0.27569815,  0.18063401],
+       [ 0.26076848,  0.23892179,  0.23664738],
+       [ 0.29198961,  0.26234032,  0.16505091],
+       [ 0.34396535,  0.24206137,  0.16240774]]), indices=array([[3, 0, 5],
+       [0, 1, 4],
+       [0, 5, 1],
+       [1, 3, 5],
+       [1, 4, 3]], dtype=int32))
+\end{verbatim}
+
+Looking just at the first row we get
+\texttt{{[}\ 0.34763842,\ \ 0.24879643,\ \ 0.12789202{]}}, you can
+confirm these are the 3 largest probabilities in \texttt{a}. You'll also
+notice \texttt{{[}3,\ 0,\ 5{]}} are the corresponding indices.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Print out the top five softmax probabilities for the predictions on the German traffic sign images found on the web. }
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+         \PY{k+kn}{import} \PY{n+nn}{sklearn}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{top\PYZus{}5} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{top\PYZus{}k}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{res}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{top\PYZus{}5}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print(res[0,:])    }
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}    for i in range(5):}
+         \PY{l+s+sd}{        for j in range(5):}
+         \PY{l+s+sd}{            num = top\PYZus{}5[0][i][j]}
+         \PY{l+s+sd}{            den = top\PYZus{}5[0][i]}
+         \PY{l+s+sd}{            print(num)}
+         \PY{l+s+sd}{            print(den)}
+         \PY{l+s+sd}{            print(np.exp(den))}
+         \PY{l+s+sd}{            print((np.exp(num))/(np.sum(np.exp(den))))\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+TopKV2(values=array([[  1.00e+00,   0.00e+00,   0.00e+00,   0.00e+00,   0.00e+00],
+       [  1.00e+00,   0.00e+00,   0.00e+00,   0.00e+00,   0.00e+00],
+       [  9.90e-01,   1.03e-02,   0.00e+00,   0.00e+00,   0.00e+00],
+       [  1.00e+00,   3.30e-04,   4.32e-13,   5.34e-17,   0.00e+00],
+       [  1.00e+00,   0.00e+00,   0.00e+00,   0.00e+00,   0.00e+00]], dtype=float32), indices=array([[22,  0,  1,  2,  3],
+       [27,  0,  1,  2,  3],
+       [27,  6,  0,  1,  2],
+       [28, 27, 31, 24,  0],
+       [37,  0,  1,  2,  3]]))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} '    for i in range(5):\textbackslash{}n        for j in range(5):\textbackslash{}n            num = top\_5[0][i][j]\textbackslash{}n            den = top\_5[0][i]\textbackslash{}n            print(num)\textbackslash{}n            print(den)\textbackslash{}n            print(np.exp(den))\textbackslash{}n            print((np.exp(num))/(np.sum(np.exp(den))))'
+\end{Verbatim}
+            
+    \begin{quote}
+\textbf{Note}: Once you have completed all of the code implementations
+and successfully answered each question above, you may finalize your
+work by exporting the iPython Notebook as an HTML document. You can do
+this by using the menu above and navigating to \n``,''\textbf{File
+-\textgreater{} Download as -\textgreater{} HTML (.html)}. Include the
+finished document along with this notebook as your submission.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:}  
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
