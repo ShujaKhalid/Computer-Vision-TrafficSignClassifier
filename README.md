@@ -82,22 +82,18 @@ My final model consisted of the following layers:
 | Input         		| 32x32x1 Grayscale image   							| 
 | Convolution      	| 5x5 kernel with a 1x1 stride 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| Max pooling	      	| 2x2 stride				|
 | Convolution    | 5x5 kernel with a 1x1 stride  									|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| Max pooling	      	| 2x2 stride				|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| Max pooling	      	| 2x2 stride 				|
 | Flatten | 
 | Fully connected		| etc.        									|
 | RELU					|												|
 | Fully connected		| etc.        									|
 | RELU					|												|
 | Fully connected		| etc.        									|
-| RELU					|												|
-| Softmax				| etc.        									|
-
- 
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
@@ -108,8 +104,8 @@ To train the model, I used the Adam optimizer, a batch size of 128 and 500 epoch
 
 My final model results were:
 * training set accuracy of 0.99
-* validation set accuracy of 0.94
-* test set accuracy of 0.93
+* validation set accuracy of 0.95
+* test set accuracy of 0.94
 
 The LeNet architecture was chosen for the analysis and in order to gain better performance, the hyperparameters were tuned. The aforementioned LeNet structure has shown to provide very good results in identifying traffic signs and digits (http://yann.lecun.com/exdb/lenet/).
 
