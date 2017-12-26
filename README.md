@@ -81,24 +81,24 @@ My final model consisted of the following layers:
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x1 Grayscale image   							| 
 | Convolution      	| 5x5 kernel with a 1x1 stride 	|
-| RELU					|		Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model										|
+| RELU					|		Rectified Linear Unit serves as the activation function andd adds non-linearity to the model										|
 | Max pooling	      	| 2x2 stride				|
 | Convolution    | 5x5 kernel with a 1x1 stride  									|
-| RELU					|			Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model									|
+| RELU					|			Rectified Linear Unit serves as the activation function andd adds non-linearity to the model									|
 | Max pooling	      	| 2x2 stride				|
-| RELU					|			Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model									|
+| RELU					|			Rectified Linear Unit serves as the activation function andd adds non-linearity to the model									|
 | Max pooling	      	| 2x2 stride 				|
 | Flatten | Convert the 2D output thus far into a 1D array
-| Fully connected		| etc.        									|
+| Fully connected		| 1st of 3 FC layers        									|
 | RELU					|	Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model											|
-| Fully connected		| etc.        									|
-| RELU					|		Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model										|
-| Fully connected		| Fianl fully connected layer outputs 1x43 array foreach of the 43 classes        									|
+| Fully connected		| 2nd of 3 FC layers        									|
+| RELU					|		Rectified Linear Unit serves as the activation function andd adds non-linearity to the model										|
+| Fully connected		| Final fully connected layer outputs 1x43 array foreach of the 43 classes        									|
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used the Adam optimizer, a batch size of 256 and 500 epochs. The learning rate was chosen to be 0.001.
+To train the model, I used the Adam optimizer, a batch size of 256 and 500 epochs with a learning rate of 0.001. These modifications to the hyperparameters resulted in meeting the required validation classification accuracy of 0.93.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
