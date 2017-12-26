@@ -81,24 +81,24 @@ My final model consisted of the following layers:
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x1 Grayscale image   							| 
 | Convolution      	| 5x5 kernel with a 1x1 stride 	|
-| RELU					|												|
+| RELU					|		Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model										|
 | Max pooling	      	| 2x2 stride				|
 | Convolution    | 5x5 kernel with a 1x1 stride  									|
-| RELU					|												|
+| RELU					|			Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model									|
 | Max pooling	      	| 2x2 stride				|
-| RELU					|												|
+| RELU					|			Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model									|
 | Max pooling	      	| 2x2 stride 				|
-| Flatten | 
+| Flatten | Convert the 2D output thus far into a 1D array
 | Fully connected		| etc.        									|
-| RELU					|												|
+| RELU					|	Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model											|
 | Fully connected		| etc.        									|
-| RELU					|												|
-| Fully connected		| etc.        									|
+| RELU					|		Rectified Linear Unit serves as the activaation function andd adds non-linearity to the model										|
+| Fully connected		| Fianl fully connected layer outputs 1x43 array foreach of the 43 classes        									|
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used the Adam optimizer, a batch size of 128 and 500 epochs. The learning rate was chosen to be 0.001.
+To train the model, I used the Adam optimizer, a batch size of 256 and 500 epochs. The learning rate was chosen to be 0.001.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -111,7 +111,7 @@ The LeNet architecture was chosen for the analysis and in order to gain better p
 
 The chosen model is the right model for the application because it produces encouraging results despite the lack of data for a number of classes, as can be seen in the image below:
 
-[image1b]
+![alt text][image1b]
 
 ### Test a Model on New Images
 
@@ -130,45 +130,69 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Priority road     		| Priority road   									| 
+| Yield    			| Yield 										|
+| Stop					| Priority road 											|
+| No entry	      		| No entry					 				|
+| Go straight or right			| Go straight or right      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
 The code for making predictions on my final model is located in the of the Ipython notebook, titled, Output Top 5 Softmax Probabilities For Each Image Found on the Web.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is very sure that this is a priority road sign (probability of 0.6), and the image does contain a priority road sign. The top five soft max probabilities were:
 
 | Probability     |     Prediction	        					| 
 |:--------------------:|:---------------------------------------------:| 
+|1.0|Priority road |
+|0.0|Speed limit (20km/h)|
+|0.0|Speed limit (30km/h)|
+|0.0|Speed limit (50km/h)|
+|0.0|Speed limit (60km/h)|
 
-
-For the second image ... 
+For the second image the model is extremely sure that it sees a yield sign, and the image does contain a yield sign.
 
 | Probability   	 |     Prediction	        					| 
 |:--------------------:|:---------------------------------------------:| 
+|1.0|Yield |
+|0.0|Speed limit (20km/h)|
+|0.0|Speed limit (30km/h)|
+|0.0|Speed limit (50km/h)|
+|0.0|Speed limit (60km/h)|
 
-
-For the third image ...
-
-| Probability    	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-
-
-For the fourth image ...
+For the third image the model is extremely sure that it sees a priority road sign, and the image does contain a priority road sign. It contains a stop sign. This is troubling because the model does not believe that there is any probability of there being a stop sign in the image,
 
 | Probability    	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
+|1.0|Priority road |
+|0.0|Speed limit (20km/h)|
+|0.0|Speed limit (30km/h)|
+|0.0|Speed limit (50km/h)|
+|0.0|Speed limit (60km/h)|
 
-
-For thefifth image ...
+For the fourth image the model is extremely sure that it sees a no entry sign, and the image does contain a no entry sign.
 
 | Probability    	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
+|1.0|No entry |
+|0.0|Speed limit (20km/h)|
+|0.0|Speed limit (30km/h)|
+|0.0|Speed limit (50km/h)|
+|0.0|Speed limit (60km/h)|
 
+For the fourth image the model is extremely sure that it sees a go straight or right sign, and the image does contain a go straight or right sign.
+
+| Probability    	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+|1.0|Go straight or right  |
+|0.0|Speed limit (20km/h)|
+|0.0|Speed limit (30km/h)|
+|0.0|Speed limit (50km/h)|
+|0.0|Speed limit (60km/h)|
+
+### Final Remarks
+
+The overall results are encouraging and certainly meet the required classification accuracy values. However, the model seems to be extremely sure about some of its predictions even if they are incorrect. This is a direct result of having exrtemely large logit values which then return values that are extremely close to 0 and 1 after going through the softmax function. This will have to be corrected in future iterations of the model.
