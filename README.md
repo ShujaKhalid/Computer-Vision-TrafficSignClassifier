@@ -18,9 +18,9 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./training_data_dist.png "Visualization"
-[image1a]: ./training_data_dist_new.png "Visualization"
+[image1a]: ./training_data_dist_new.png "Visualization1"
 [image1b]: ./class_accuracies.jpg "Grayscaling"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[image2]: ./examples/grayscale.jpg "Grayscaling1"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples_test/13.jpg "Traffic Sign 1"
 [image5]: ./examples_test/14.jpg "Traffic Sign 2"
@@ -70,6 +70,7 @@ Here is an example of a traffic sign image before and after grayscaling.
 The next step was to create additional images as the visualization of the data clearly shows that there aren't enough images to properly train the model. A number of images were thus modified to create new images. A summary of the images that were modified and how they were modified is included in [signnames.csv] (https://github.com/ShujaKhalid/Computer-Vision-TrafficSignClassifier/blob/master/signnames.csv)
 
 The resulting data distribution is presented below:
+
 ![alt text][image1a]
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
@@ -78,15 +79,24 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 Grayscale image   							| 
+| Convolution      	| 5x5 kernel with a 1x1 stride 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
+| Convolution    | 5x5 kernel with a 1x1 stride  									|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| Flatten | 
 | Fully connected		| etc.        									|
+| RELU					|												|
+| Fully connected		| etc.        									|
+| RELU					|												|
+| Fully connected		| etc.        									|
+| RELU					|												|
 | Softmax				| etc.        									|
-|						|												|
-|						|												|
+
  
 
 
